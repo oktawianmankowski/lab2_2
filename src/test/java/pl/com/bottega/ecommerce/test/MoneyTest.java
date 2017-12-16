@@ -62,4 +62,12 @@ public class MoneyTest {
         assertThat(money.getCurrencyCode(), is(PLN));
     }
 
+    @Test
+    public void returnIsGreaterThanMoney() {
+        money = new Money(denomination);
+        int value = 50;
+        Money valueMoney = new Money(value);
+        assertThat(money.greaterThan(valueMoney), is(true));
+    }
+
 }
