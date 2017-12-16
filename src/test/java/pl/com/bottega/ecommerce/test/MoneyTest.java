@@ -17,65 +17,61 @@ public class MoneyTest {
     @Before
     public void setUp() {
         denomination = 100;
+        money = new Money(denomination);
     }
 
     @Test
     public void returnDefaultCurrencyCode() {
-        money = new Money(denomination);
         assertThat(money.getCurrencyCode(), is("EUR"));
     }
 
     @Test
     public void returnMoneyMultipliedByDouble() {
-        money = new Money(denomination);
         double value = 2.13;
         assertThat(money.multiplyBy(value), is(new Money(denomination * value)));
     }
 
     @Test
     public void returnMoneyMultipliedByBigDecimal() {
-        money = new Money(denomination);
         BigDecimal value = new BigDecimal(2.13);
         assertThat(money.multiplyBy(value), is(new Money(denomination * value.doubleValue())));
     }
 
     @Test
     public void returnMoneyAddedByMoney() {
-        money = new Money(denomination);
         int value = 123;
-        Money valueMoney = new Money(value);
-        assertThat(money.add(valueMoney), is(new Money(denomination + value)));
+        assertThat(money.add(new Money(value)), is(new Money(denomination + value)));
     }
 
     @Test
     public void returnMoneySubtractedByMoney() {
-        money = new Money(denomination);
         double value = 23.89;
-        Money valueMoney = new Money(value);
-        assertThat(money.subtract(valueMoney), is(new Money(denomination - value)));
+        assertThat(money.subtract(new Money(value)), is(new Money(denomination - value)));
     }
 
     @Test
     public void returnCurrencyCode() {
-        String PLN = "PLN";
-        money = new Money(denomination, PLN);
-        assertThat(money.getCurrencyCode(), is(PLN));
+        final String PLN = "PLN";
+        Money moneyPLN = new Money(denomination, PLN);
+        assertThat(moneyPLN.getCurrencyCode(), is(PLN));
     }
 
     @Test
     public void returnIsGreaterThanMoney() {
-        money = new Money(denomination);
         int value = 50;
-        Money valueMoney = new Money(value);
-        assertThat(money.greaterThan(valueMoney), is(true));
+        assertThat(money.greaterThan(new Money(value)), is(true));
     }
 
     @Test
     public void returnIsLessThanMoney() {
-        money = new Money(denomination);
         int value = 150;
-        Money valueMoney = new Money(value);
-        assertThat(money.lessThan(valueMoney), is(true));
+        assertThat(money.lessThan(new Money(value)), is(true));
+    }
+
+    @Test
+    public void returnIsLessOrEqualsMoney() {
+        int value = 100;
+        assertThat(money.lessOrEquals(new Money(value)), is(true));
     }
 
 }
