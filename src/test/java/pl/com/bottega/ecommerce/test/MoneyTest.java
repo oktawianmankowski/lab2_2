@@ -55,4 +55,11 @@ public class MoneyTest {
         assertThat(money.subtract(valueMoney), is(new Money(denomination - value)));
     }
 
+    @Test
+    public void returnCurrencyCode() {
+        String PLN = "PLN";
+        money = new Money(denomination, PLN);
+        assertThat(money.getCurrencyCode(), is(PLN));
+    }
+
 }
