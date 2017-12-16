@@ -47,4 +47,12 @@ public class MoneyTest {
         assertThat(money.add(valueMoney), is(new Money(denomination + value)));
     }
 
+    @Test
+    public void returnMoneySubtractedByMoney() {
+        money = new Money(denomination);
+        double value = 23.89;
+        Money valueMoney = new Money(value);
+        assertThat(money.subtract(valueMoney), is(new Money(denomination - value)));
+    }
+
 }
