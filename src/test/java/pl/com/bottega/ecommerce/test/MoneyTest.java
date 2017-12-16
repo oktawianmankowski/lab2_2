@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
 
+import java.math.BigDecimal;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -30,4 +32,10 @@ public class MoneyTest {
         assertThat(money.multiplyBy(value), is(new Money(denomination * value)));
     }
 
+    @Test
+    public void returnMultipliedByBigDecimal() {
+        money = new Money(denomination);
+        BigDecimal value = new BigDecimal(2.13);
+        assertThat(money.multiplyBy(value), is(new Money(denomination * value.doubleValue())));
+    }
 }
