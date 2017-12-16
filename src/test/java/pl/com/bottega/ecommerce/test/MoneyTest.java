@@ -26,16 +26,25 @@ public class MoneyTest {
     }
 
     @Test
-    public void returnMultipliedByDouble() {
+    public void returnMoneyMultipliedByDouble() {
         money = new Money(denomination);
         double value = 2.13;
         assertThat(money.multiplyBy(value), is(new Money(denomination * value)));
     }
 
     @Test
-    public void returnMultipliedByBigDecimal() {
+    public void returnMoneyMultipliedByBigDecimal() {
         money = new Money(denomination);
         BigDecimal value = new BigDecimal(2.13);
         assertThat(money.multiplyBy(value), is(new Money(denomination * value.doubleValue())));
     }
+
+    @Test
+    public void returnMoneyAddedByMoney() {
+        money = new Money(denomination);
+        int value = 123;
+        Money valueMoney = new Money(value);
+        assertThat(money.add(valueMoney), is(new Money(denomination + value)));
+    }
+
 }
