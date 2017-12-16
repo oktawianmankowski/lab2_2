@@ -33,4 +33,10 @@ public class MoneyTest {
 		Money moneyPLN = new Money(20, "PLN");
 		moneyEUR.add(moneyPLN);
 	}
+
+	@Test
+	public void roundingMoneyIsCorrect() {
+		Money money = new Money(0.005);
+		assertThat(money, Matchers.is(new Money(0.01)));
+	}
 }
