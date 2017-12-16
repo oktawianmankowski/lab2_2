@@ -26,4 +26,11 @@ public class MoneyTest {
 		Money otherMoney = new Money(10, "EUR");
 		assertThat(money.subtract(otherMoney), Matchers.is(new Money(10, "EUR")));
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void addingTwoDifferentCurrenciesThrowsException() {
+		Money moneyEUR = new Money(10, "EUR");
+		Money moneyPLN = new Money(20, "PLN");
+		moneyEUR.add(moneyPLN);
+	}
 }
