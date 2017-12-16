@@ -13,4 +13,10 @@ public class MoneyTest {
 		assertThat(money.multiplyBy(2), Matchers.is(new Money(20, "PLN")));
 	}
 
+	@Test
+	public void addingTwentyEuroToTenEuroIsCorrect() {
+		Money money = new Money(10, "EUR");
+		Money otherMoney = new Money(20, "EUR");
+		assertThat(money.add(otherMoney), Matchers.is(new Money(30, "EUR")));
+	}
 }
