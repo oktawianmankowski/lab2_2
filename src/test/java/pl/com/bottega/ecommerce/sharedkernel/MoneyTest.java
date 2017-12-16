@@ -19,4 +19,11 @@ public class MoneyTest {
 		Money otherMoney = new Money(20, "EUR");
 		assertThat(money.add(otherMoney), Matchers.is(new Money(30, "EUR")));
 	}
+
+	@Test
+	public void subtractingTenEuroFromTwentyEuroIsCorrect() {
+		Money money = new Money(20, "EUR");
+		Money otherMoney = new Money(10, "EUR");
+		assertThat(money.subtract(otherMoney), Matchers.is(new Money(10, "EUR")));
+	}
 }
