@@ -1,19 +1,33 @@
 package pl.com.bottega.ecommerce.test;
 
-import org.hamcrest.Matchers;
+import org.junit.Before;
 import org.junit.Test;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class MoneyTest {
 
     private Money money;
+    private int denomination;
+
+    @Before
+    public void setUp() {
+        denomination = 100;
+    }
 
     @Test
     public void returnDefaultCurrencyCode() {
-        money = new Money(100);
-        assertThat(money.getCurrencyCode(), Matchers.is("EUR"));
+        money = new Money(denomination);
+        assertThat(money.getCurrencyCode(), is("EUR"));
     }
-    
+
+    @Test
+    public void returnMultipliedByDouble() {
+        money = new Money(denomination);
+        double value = 2.13;
+        assertThat(money.multiplyBy(value), is(new Money(denomination * value)));
+    }
+
 }
