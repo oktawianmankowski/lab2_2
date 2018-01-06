@@ -74,4 +74,9 @@ public class MoneyTest {
         assertThat(money.lessOrEquals(new Money(value)), is(true));
     }
 
+    @Test
+    public void returnIsEqualsMoney() {
+        assertThat(money.equals(new Money(denomination)), is(true));
+    }
+
 }
