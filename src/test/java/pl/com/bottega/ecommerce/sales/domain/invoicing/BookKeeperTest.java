@@ -54,6 +54,39 @@ public class BookKeeperTest {
         assertEquals(lines.size(), 2);
     }
 
+    @Test
+    public void isTaxCalculatedProperly() throws Exception {
+        RequestItem requestItem = createRequestItem1();
+        RequestItem requestItem2 = createRequestItem2();
+
+        ClientData clientData = new ClientData(Id.generate(), "Jan Kowalski");
+        InvoiceRequest invoiceRequest = new InvoiceRequest(clientData);
+        invoiceRequest.add(requestItem);
+        invoiceRequest.add(requestItem2);
+
+        Invoice invoice = bookKeeper.issuance(invoiceRequest, taxPolicy);
+
+        List<InvoiceLine> lines = invoice.getItems();
+        InvoiceLine invoiceLine1 = lines.get(0);
+        InvoiceLine invoiceLine2 = lines.get(1);
+
+        BigDecimal expectedTax1 = BigDecimal.valueOf(98.29);
+        BigDecimal expectedTax2 = BigDecimal.valueOf(0.67);
+
+        BigDecimal expectedGros1 = BigDecimal.valueOf(525.63);
+        BigDecimal expectedGros2 = BigDecimal.valueOf(10.27);
+
+        BigDecimal expectedTotalGros = BigDecimal.valueOf(535.90);
+
+        assertTrue(invoice.getGros().getDenomination().compareTo(expectedTotalGros) == 0);
+
+        assertTrue(invoiceLine1.getTax().getAmount().getDenomination().compareTo(expectedTax1) == 0);
+        assertTrue(invoiceLine2.getTax().getAmount().getDenomination().compareTo(expectedTax2) == 0);
+
+        assertTrue(invoiceLine1.getGros().getDenomination().compareTo(expectedGros1) == 0);
+        assertTrue(invoiceLine2.getGros().getDenomination().compareTo(expectedGros2) == 0);
+    }
+
     private RequestItem createRequestItem1() {
         Money price = new Money(213.67, Money.DEFAULT_CURRENCY);
         ProductData productData = new ProductData(Id.generate(), price, "ticket", ProductType.STANDARD, new Date());
@@ -65,4 +98,6 @@ public class BookKeeperTest {
         ProductData productData = new ProductData(Id.generate(), price, "butter", ProductType.FOOD, new Date());
         return new RequestItem(productData, 3, price.multiplyBy(3));
     }
+
+
 }

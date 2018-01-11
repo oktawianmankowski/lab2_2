@@ -66,6 +66,10 @@ public class Money {
 		return new Money(denomination.multiply(multiplier), currencyCode);
 	}
 
+	public BigDecimal getDenomination() {
+		return denomination;
+	}
+
 	public Money add(Money money) {
 		if (!compatibleCurrency(money)) {
 			throw new IllegalArgumentException("Currency mismatch");
