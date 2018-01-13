@@ -114,6 +114,15 @@ public class BookKeeperTest {
         assertEquals(lines.size(), 0);
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void addingTwoDifferentCurriencesThrowsAnException() throws Exception{
+        Money firstCurrency = new Money(42.30, Money.DEFAULT_CURRENCY);
+        Money secondCurrency = new Money(120.12, "PLN");
+
+        firstCurrency.add(secondCurrency);
+    }
+
+
     private RequestItem createRequestItem1() {
         Money price = new Money(213.67, Money.DEFAULT_CURRENCY);
         ProductData productData = new ProductData(Id.generate(), price, "ticket", ProductType.STANDARD, new Date());
