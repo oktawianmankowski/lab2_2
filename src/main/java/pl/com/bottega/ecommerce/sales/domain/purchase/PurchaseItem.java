@@ -18,37 +18,34 @@ package pl.com.bottega.ecommerce.sales.domain.purchase;
 import pl.com.bottega.ecommerce.sales.domain.productscatalog.ProductData;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
 
-
 public class PurchaseItem {
-	
 
-	private ProductData productData;
-	
-	private int quantity;	
-	
+    private ProductData productData;
 
-	private Money totalCost;
-	
-	@SuppressWarnings("unused")
-	private PurchaseItem() {}
-	
-	public PurchaseItem(ProductData productData, int quantity, Money totalCost) {
-		this.productData = productData;
-		this.quantity = quantity;
-		this.totalCost = totalCost;
-	}
+    private int quantity;
 
-	public int getQuantity() {
-		return quantity;
-	}
+    private Money totalCost;
 
-	public ProductData getProductData() {
-		return productData;
-	}
+    @SuppressWarnings("unused")
+    private PurchaseItem() {
+    }
 
-	public Money getTotalCost() {
-		return totalCost;
-	}
+    public PurchaseItem(ProductData productData, int quantity, Money totalCost) {
+        this.productData = productData;
+        this.quantity = quantity;
+        this.totalCost = totalCost;
+    }
 
-	
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public ProductData getProductData() {
+        return productData;
+    }
+
+    public Money getTotalCost() {
+        return totalCost;
+    }
+
 }
