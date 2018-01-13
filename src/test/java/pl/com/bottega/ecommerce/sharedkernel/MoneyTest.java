@@ -22,6 +22,20 @@ public class MoneyTest {
         assertThat(actualMoney.multiplyBy(multiplyier), Matchers.is(expectedMoney));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void addTestException() throws IllegalArgumentException {
+        BigDecimal firstValue = new BigDecimal(100);
+        BigDecimal secondValue = new BigDecimal(100);
+        BigDecimal expectedValue = new BigDecimal(200);
+        Currency firstCurrency = Currency.getInstance("USD");
+        Currency secondCurrency = Currency.getInstance("PLN");
+        Money firstMoney = new Money(firstValue, firstCurrency);
+        Money secondMoney = new Money(secondValue, secondCurrency);
+        Money expectedMoney = new Money(expectedValue, secondCurrency);
+
+        assertThat(firstMoney.add(secondMoney), Matchers.is(expectedMoney));
+    }
+
     @Test
     public void addTestPositive() {
         BigDecimal actualValue = new BigDecimal(100);
@@ -36,29 +50,29 @@ public class MoneyTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void substractTestException() throws IllegalArgumentException {
-        BigDecimal firstValue = new BigDecimal(100);
+        BigDecimal firstValue = new BigDecimal(200);
         BigDecimal secondValue = new BigDecimal(100);
-        BigDecimal expectedValue = new BigDecimal(200);
+        BigDecimal expectedValue = new BigDecimal(100);
         Currency firstCurrency = Currency.getInstance("USD");
         Currency secondCurrency = Currency.getInstance("PLN");
         Money firstMoney = new Money(firstValue, firstCurrency);
         Money secondMoney = new Money(secondValue, secondCurrency);
         Money expectedMoney = new Money(expectedValue, secondCurrency);
 
-        assertThat(firstMoney.add(secondMoney), Matchers.is(expectedMoney));
+        assertThat(firstMoney.subtract(secondMoney), Matchers.is(expectedMoney));
     }
 
     @Test
     public void substractTestPositive() {
-        BigDecimal firstValue = new BigDecimal(100);
+        BigDecimal firstValue = new BigDecimal(200);
         BigDecimal secondValue = new BigDecimal(100);
-        BigDecimal expectedValue = new BigDecimal(200);
+        BigDecimal expectedValue = new BigDecimal(100);
         Currency firstCurrency = Currency.getInstance("USD");
         Money firstMoney = new Money(firstValue, firstCurrency);
         Money secondMoney = new Money(secondValue, firstCurrency);
         Money expectedMoney = new Money(expectedValue, firstCurrency);
 
-        assertThat(firstMoney.add(secondMoney), Matchers.is(expectedMoney));
+        assertThat(firstMoney.subtract(secondMoney), Matchers.is(expectedMoney));
     }
 
 }
