@@ -38,6 +38,12 @@ public class MoneyTest {
     }
 
     @Test
+    public void returnMoneyMultipliedByZero() {
+        double value = 0;
+        assertThat(money.multiplyBy(value), is(new Money(denomination * value)));
+    }
+
+    @Test
     public void returnMoneyAddedByMoney() {
         int value = 123;
         assertThat(money.add(new Money(value)), is(new Money(denomination + value)));
