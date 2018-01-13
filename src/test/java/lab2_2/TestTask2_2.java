@@ -9,15 +9,8 @@ import pl.com.bottega.ecommerce.sharedkernel.Money;
 public class TestTask2_2 {
 
     @org.junit.Test
-    public void testExample() {
-        boolean testResult = true;
-        assertThat(testResult, Matchers.is(true));
-    }
-
-    @org.junit.Test
     public void moneyMultiplyingByTwo() {
         Money money = new Money(120, "PLN");
-
         assertThat(money.multiplyBy(2), Matchers.is(new Money(240, "PLN")));
     }
 
@@ -81,4 +74,17 @@ public class TestTask2_2 {
         assertThat(result, Matchers.is(false));
     }
 
+    @org.junit.Test
+    public void moneyGreaterThanMethodTest() {
+        Money money1arg = new Money(60, "EUR");
+        Money money2arg = new Money(20);
+        assertThat(money1arg.greaterThan(money2arg), Matchers.is(true));
+    }
+
+    @org.junit.Test
+    public void moneyLessOrEqualThanMethodTest() {
+        Money money1arg = new Money(60, "EUR");
+        Money money2arg = new Money(20);
+        assertThat(money1arg.lessThan(money2arg), Matchers.is(false));
+    }
 }
