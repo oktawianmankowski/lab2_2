@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.ClientData;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.Id;
+import pl.com.bottega.ecommerce.sales.domain.payment.Payment;
+import pl.com.bottega.ecommerce.sales.domain.payment.PaymentFactory;
 import pl.com.bottega.ecommerce.sales.domain.productscatalog.ProductData;
 import pl.com.bottega.ecommerce.sales.domain.productscatalog.ProductType;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
@@ -85,6 +87,20 @@ public class BookKeeperTest {
 
         assertTrue(invoiceLine1.getGros().getDenomination().compareTo(expectedGros1) == 0);
         assertTrue(invoiceLine2.getGros().getDenomination().compareTo(expectedGros2) == 0);
+    }
+
+    @Test
+    public void hasOneInvoiceLine() throws Exception {
+        RequestItem requestItem = createRequestItem1();
+
+        ClientData clientData = new ClientData(Id.generate(), "Jan Kowalski");
+        InvoiceRequest invoiceRequest = new InvoiceRequest(clientData);
+        invoiceRequest.add(requestItem);
+
+        Invoice invoice = bookKeeper.issuance(invoiceRequest, taxPolicy);
+
+        List<InvoiceLine> lines = invoice.getItems();
+        assertEquals(lines.size(), 1);
     }
 
     private RequestItem createRequestItem1() {
