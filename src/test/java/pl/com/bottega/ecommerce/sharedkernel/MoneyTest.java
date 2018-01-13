@@ -34,4 +34,31 @@ public class MoneyTest {
         assertThat(actualMoneyFirst.add(actualMoneySecond), Matchers.is(expectedMoney));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void substractTestException() throws IllegalArgumentException {
+        BigDecimal firstValue = new BigDecimal(100);
+        BigDecimal secondValue = new BigDecimal(100);
+        BigDecimal expectedValue = new BigDecimal(200);
+        Currency firstCurrency = Currency.getInstance("USD");
+        Currency secondCurrency = Currency.getInstance("PLN");
+        Money firstMoney = new Money(firstValue, firstCurrency);
+        Money secondMoney = new Money(secondValue, secondCurrency);
+        Money expectedMoney = new Money(expectedValue, secondCurrency);
+
+        assertThat(firstMoney.add(secondMoney), Matchers.is(expectedMoney));
+    }
+
+    @Test
+    public void substractTestPositive() {
+        BigDecimal firstValue = new BigDecimal(100);
+        BigDecimal secondValue = new BigDecimal(100);
+        BigDecimal expectedValue = new BigDecimal(200);
+        Currency firstCurrency = Currency.getInstance("USD");
+        Money firstMoney = new Money(firstValue, firstCurrency);
+        Money secondMoney = new Money(secondValue, firstCurrency);
+        Money expectedMoney = new Money(expectedValue, firstCurrency);
+
+        assertThat(firstMoney.add(secondMoney), Matchers.is(expectedMoney));
+    }
+
 }
