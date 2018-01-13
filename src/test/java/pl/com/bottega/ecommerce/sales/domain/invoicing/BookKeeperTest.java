@@ -103,6 +103,17 @@ public class BookKeeperTest {
         assertEquals(lines.size(), 1);
     }
 
+    @Test
+    public void hasNoInvoiceLines() throws Exception {
+        ClientData clientData = new ClientData(Id.generate(), "Jan Kowalski");
+        InvoiceRequest invoiceRequest = new InvoiceRequest(clientData);
+
+        Invoice invoice = bookKeeper.issuance(invoiceRequest, taxPolicy);
+
+        List<InvoiceLine> lines = invoice.getItems();
+        assertEquals(lines.size(), 0);
+    }
+
     private RequestItem createRequestItem1() {
         Money price = new Money(213.67, Money.DEFAULT_CURRENCY);
         ProductData productData = new ProductData(Id.generate(), price, "ticket", ProductType.STANDARD, new Date());
