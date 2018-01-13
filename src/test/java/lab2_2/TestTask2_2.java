@@ -40,4 +40,19 @@ public class TestTask2_2 {
         Money money2arg = new Money(20);
         assertThat(money1arg.add(money2arg), Matchers.is(new Money(80, "EUR")));
     }
+
+    @org.junit.Test
+    public void moneySubstractionTwoArguments() {
+        Money money = new Money(60, "PLN");
+        Money otherMoney = new Money(20, "PLN");
+        assertThat(money.subtract(otherMoney), Matchers.is(new Money(40, "PLN")));
+    }
+
+    @org.junit.Test
+    public void moneySubstractionTwoArgumentsOneWithDefaultCurrency() {
+        Money money = new Money(60, "EUR");
+        Money otherMoney = new Money(20);
+        assertThat(money.subtract(otherMoney), Matchers.is(new Money(40, "EUR")));
+    }
+
 }
