@@ -58,25 +58,32 @@ public class MoneyTest {
 
     @Test
     public void returnIsGreaterThanMoney() {
-        int value = 50;
+        int value = denomination / 2;
         assertThat(money.greaterThan(new Money(value)), is(true));
+        assertThat(money.greaterThan(new Money(value + denomination)), is(false));
     }
 
     @Test
     public void returnIsLessThanMoney() {
-        int value = 150;
+        int value = denomination * 2;
         assertThat(money.lessThan(new Money(value)), is(true));
+        assertThat(money.lessThan(new Money(value - denomination)), is(false));
+
     }
 
     @Test
     public void returnIsLessOrEqualsMoney() {
-        int value = 100;
+        int value = denomination;
         assertThat(money.lessOrEquals(new Money(value)), is(true));
+        assertThat(money.lessOrEquals(new Money(value + denomination)), is(true));
+        assertThat(money.lessOrEquals(new Money(value - denomination)), is(false));
+
     }
 
     @Test
     public void returnIsEqualsMoney() {
         assertThat(money.equals(new Money(denomination)), is(true));
+        assertThat(money.equals(new Money(denomination * 2)), is(false));
     }
 
 }
