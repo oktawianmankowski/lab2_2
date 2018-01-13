@@ -14,6 +14,12 @@ public class MoneyTest {
 	}
 
 	@Test
+	public void multiplyingByZeroIsCorrect() {
+		Money money = new Money(10, "PLN");
+		assertThat(money.multiplyBy(0), Matchers.is(Money.ZERO));
+	}
+
+	@Test
 	public void addingTwentyEuroToTenEuroIsCorrect() {
 		Money money = new Money(10, "EUR");
 		Money otherMoney = new Money(20, "EUR");
