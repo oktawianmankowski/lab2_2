@@ -43,16 +43,42 @@ public class TestTask2_2 {
 
     @org.junit.Test
     public void moneySubstractionTwoArguments() {
-        Money money = new Money(60, "PLN");
-        Money otherMoney = new Money(20, "PLN");
-        assertThat(money.subtract(otherMoney), Matchers.is(new Money(40, "PLN")));
+        Money money1arg = new Money(60, "PLN");
+        Money money2arg = new Money(20, "PLN");
+        assertThat(money1arg.subtract(money2arg), Matchers.is(new Money(40, "PLN")));
     }
 
     @org.junit.Test
     public void moneySubstractionTwoArgumentsOneWithDefaultCurrency() {
-        Money money = new Money(60, "EUR");
-        Money otherMoney = new Money(20);
-        assertThat(money.subtract(otherMoney), Matchers.is(new Money(40, "EUR")));
+        Money money1arg = new Money(60, "EUR");
+        Money money2arg = new Money(20);
+        assertThat(money1arg.subtract(money2arg), Matchers.is(new Money(40, "EUR")));
+    }
+
+    @org.junit.Test
+    public void exceptionThrownByAddBecauseOfDifferentCurrencies() {
+        Money money1arg = new Money(60, "EUR");
+        Money money2arg = new Money(20, "PLN");
+        boolean result = true;
+        try {
+            money1arg.add(money2arg);
+        } catch (IllegalArgumentException e) {
+            result = false;
+        }
+        assertThat(result, Matchers.is(false));
+    }
+
+    @org.junit.Test
+    public void exceptionThrownBySubtractionBecauseOfDifferentCurrencies() {
+        Money money1arg = new Money(60, "EUR");
+        Money money2arg = new Money(20, "PLN");
+        boolean result = true;
+        try {
+            money1arg.subtract(money2arg);
+        } catch (IllegalArgumentException e) {
+            result = false;
+        }
+        assertThat(result, Matchers.is(false));
     }
 
 }
