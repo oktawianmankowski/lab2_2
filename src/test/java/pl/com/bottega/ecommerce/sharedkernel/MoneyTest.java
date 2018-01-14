@@ -2,10 +2,6 @@ package pl.com.bottega.ecommerce.sharedkernel;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
-
-import java.lang.reflect.Method;
-import java.math.BigDecimal;
-
 import static org.junit.Assert.*;
 
 /**
@@ -21,10 +17,15 @@ public class MoneyTest {
 
 
     @Test(expected = IllegalArgumentException.class)
-    public void addMoneyWithDenominationNotSameCurrencyCode(){
+    public void addMoneyWithNotSameCurrencyCode(){
         Money money = new Money(100, "PLN");
         Money result = money.add(new Money(100,"GBH"));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void substractMoneyWithNotSameCurrencyCode(){
+        Money money = new Money(100, "PLN");
+        Money result = money.subtract(new Money(100,"GBH"));
+    }
 
 }
