@@ -35,5 +35,10 @@ public class MoneyTest {
         assertThat(money.add(result), Matchers.is(new Money(200,"PLN")));
     }
 
-
+    @Test
+    public void subtractMoneyProperly(){
+        Money money = new Money(100, "PLN");
+        Money result = new Money(100,"PLN");
+        assertThat(money.subtract(result), Matchers.is(new Money(0,"PLN")));
+    }
 }
