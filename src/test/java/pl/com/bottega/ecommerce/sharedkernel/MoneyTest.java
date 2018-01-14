@@ -28,4 +28,12 @@ public class MoneyTest {
         Money result = money.subtract(new Money(100,"GBH"));
     }
 
+    @Test
+    public void addMoneyProperly(){
+        Money money = new Money(100, "PLN");
+        Money result = new Money(100,"PLN");
+        assertThat(money.add(result), Matchers.is(new Money(200,"PLN")));
+    }
+
+
 }
