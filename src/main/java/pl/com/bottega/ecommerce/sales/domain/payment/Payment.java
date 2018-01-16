@@ -21,23 +21,19 @@ import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 public class Payment {
 
-	private ClientData clientData;
+    private ClientData clientData;
+    private Money amount;
+    private PaymentFactory paymentFactory;
+    private Id aggregateId;
 
-	private Money amount;
+    Payment(Id aggregateId, ClientData clientData, Money amount) {
+        this.aggregateId = aggregateId;
+        this.clientData = clientData;
+        this.amount = amount;
+    }
 
-	private PaymentFactory paymentFactory;
+    public Payment rollBack() {
 
-	private Id aggregateId;
-
-
-	Payment(Id aggregateId, ClientData clientData, Money amount) {
-		this.aggregateId = aggregateId;
-		this.clientData = clientData;
-		this.amount = amount;
-	}
-
-	public Payment rollBack() {
-
-		return paymentFactory.createPayment(clientData, amount.multiplyBy(-1));
-	}
+        return paymentFactory.createPayment(clientData, amount.multiplyBy(-1));
+    }
 }
