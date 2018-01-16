@@ -17,32 +17,59 @@ public class Testy_2_2 {
         Money money = new Money(120);
         assertThat(money.multiplyBy(0.5), Matchers.is(new Money(60)));
     }
-    @Test
-    public void testShouldGiveSumMoneyTwoArguments() {
+
+    @Test public void testShouldGiveSumMoneyTwoArguments() {
         Money money1arg = new Money(60, "PLN");
         Money money2arg = new Money(200, "PLN");
         assertThat(money1arg.add(money2arg), Matchers.is(new Money(260, "PLN")));
     }
 
-    @Test
-    public void testShouldGiveSubtractMoneyTwoArgumentsAndOneCurrency() {
+    @Test public void testShouldGiveSubtractMoneyTwoArgumentsAndOneCurrency() {
         Money money1arg = new Money(60, "EUR");
         Money money2arg = new Money(20);
         assertThat(money1arg.subtract(money2arg), Matchers.is(new Money(40, "EUR")));
     }
 
-    @Test
-    public void testShouldGiveSubtractMoneyTwoArgumentsAndTwoCurrency() {
+    @Test public void testShouldGiveSubtractMoneyTwoArgumentsAndTwoCurrency() {
         Money money1arg = new Money(60, "PLN");
         Money money2arg = new Money(20, "PLN");
         assertThat(money1arg.subtract(money2arg), Matchers.is(new Money(40, "PLN")));
     }
 
-    @Test
-    public void testShouldGiveSumMoneyWithCurrencyCodeEur() {
+    @Test public void testShouldGiveSumMoneyWithCurrencyCodeEur() {
         Money money1arg = new Money(60);
         Money money2arg = new Money(20);
         assertThat(money1arg.add(money2arg), Matchers.is(new Money(80, "EUR")));
+    }
+
+    @Test public void testShouldExceptionThrownByAddBecauseOfDifferentCurrencies() {
+        Money money1arg = new Money(1223, "EUR");
+        Money money2arg = new Money(20, "PLN");
+        boolean result = true;
+        try {
+            money1arg.add(money2arg);
+        } catch (IllegalArgumentException e) {
+            result = false;
+        }
+        assertThat(result, Matchers.is(false));
+    }
+
+    @Test public void testShouldExceptionThrownBySubtractionBecauseOfDifferentCurrencies() {
+        Money money1arg = new Money(56418, "EUR");
+        Money money2arg = new Money(20, "PLN");
+        boolean result = true;
+        try {
+            money1arg.subtract(money2arg);
+        } catch (IllegalArgumentException e) {
+            result = false;
+        }
+        assertThat(result, Matchers.is(false));
+    }
+
+    @Test(expected = IllegalArgumentException.class) public void TestShouldAddingTwoDifferentCurrenciesThrowsException() {
+        Money moneyEUR = new Money(10, "EUR");
+        Money moneyPLN = new Money(20, "PLN");
+        moneyEUR.add(moneyPLN);
     }
 
 }
