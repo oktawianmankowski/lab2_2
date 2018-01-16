@@ -25,10 +25,24 @@ public class Testy_2_2 {
     }
 
     @Test
-    public void testShouldGiveSbtractMoneyTwoArguments() {
+    public void testShouldGiveSubtractMoneyTwoArgumentsAndOneCurrency() {
         Money money1arg = new Money(60, "EUR");
         Money money2arg = new Money(20);
         assertThat(money1arg.subtract(money2arg), Matchers.is(new Money(40, "EUR")));
+    }
+
+    @Test
+    public void testShouldGiveSubtractMoneyTwoArgumentsAndTwoCurrency() {
+        Money money1arg = new Money(60, "PLN");
+        Money money2arg = new Money(20, "PLN");
+        assertThat(money1arg.subtract(money2arg), Matchers.is(new Money(40, "PLN")));
+    }
+
+    @Test
+    public void testShouldGiveSumMoneyWithCurrencyCodeEur() {
+        Money money1arg = new Money(60);
+        Money money2arg = new Money(20);
+        assertThat(money1arg.add(money2arg), Matchers.is(new Money(80, "EUR")));
     }
 
 }
