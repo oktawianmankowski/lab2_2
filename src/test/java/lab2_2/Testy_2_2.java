@@ -24,4 +24,11 @@ public class Testy_2_2 {
         assertThat(money1arg.add(money2arg), Matchers.is(new Money(260, "PLN")));
     }
 
+    @Test
+    public void testShouldGiveSbtractMoneyTwoArguments() {
+        Money money1arg = new Money(60, "EUR");
+        Money money2arg = new Money(20);
+        assertThat(money1arg.subtract(money2arg), Matchers.is(new Money(40, "EUR")));
+    }
+
 }
