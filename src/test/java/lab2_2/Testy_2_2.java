@@ -17,6 +17,11 @@ public class Testy_2_2 {
         Money money = new Money(120);
         assertThat(money.multiplyBy(0.5), Matchers.is(new Money(60)));
     }
-
+    @Test
+    public void testShouldGiveSumMoneyTwoArguments() {
+        Money money1arg = new Money(60, "PLN");
+        Money money2arg = new Money(200, "PLN");
+        assertThat(money1arg.add(money2arg), Matchers.is(new Money(260, "PLN")));
+    }
 
 }
