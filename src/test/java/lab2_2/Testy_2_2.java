@@ -2,7 +2,14 @@ package lab2_2;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import pl.com.bottega.ecommerce.sales.domain.invoicing.StandardTax;
+import pl.com.bottega.ecommerce.sales.domain.invoicing.Tax;
+import pl.com.bottega.ecommerce.sales.domain.invoicing.TaxPolicy;
+import pl.com.bottega.ecommerce.sales.domain.productscatalog.ProductType;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
+
+import java.math.BigDecimal;
+import java.util.Currency;
 
 import static org.junit.Assert.assertThat;
 
@@ -66,10 +73,19 @@ public class Testy_2_2 {
         assertThat(result, Matchers.is(false));
     }
 
-    @Test(expected = IllegalArgumentException.class) public void TestShouldAddingTwoDifferentCurrenciesThrowsException() {
+    @Test(expected = IllegalArgumentException.class)
+    public void TestShouldAddingTwoDifferentCurrenciesThrowsException() {
         Money moneyEUR = new Money(10, "EUR");
         Money moneyPLN = new Money(20, "PLN");
         moneyEUR.add(moneyPLN);
     }
 
+    @Test public void testShouldDrugTaxPolicyTestPositive() {
+        TaxPolicy tax = new StandardTax();
+        Currency currency = Currency.getInstance("USD");
+        Tax actualTax = tax.calculateTax(ProductType.FOOD, new Money(new BigDecimal(100), currency));
+        Tax expectedTax = new Tax(new Money(new BigDecimal(7), currency), "5% (D)");
+
+        assertThat(actualTax.getAmount(), Matchers.is(expectedTax.getAmount()));
+    }
 }
