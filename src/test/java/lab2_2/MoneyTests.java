@@ -84,4 +84,31 @@ public class MoneyTests {
 		assertThat(money1.multiplyBy(new BigDecimal(10)), is(result));
 	}
 
+	@Test
+	public void testIsGratherThanLower() {
+		Money money = new Money(10);
+		Money money2 = new Money(20);
+		assertThat(money2.greaterThan(money), is(true));
+	}
+
+	@Test
+	public void testIsLessEqualsThanBigger() {
+		Money money = new Money(10);
+		Money money2 = new Money(20);
+		assertThat(money.lessOrEquals(money2), is(true));
+	}
+
+	@Test
+	public void testIsLessEqualsThanSame() {
+		Money money = new Money(10);
+		Money money2 = new Money(10);
+		assertThat(money.lessOrEquals(money2), is(true));
+	}
+
+	@Test
+	public void testIsLessThanBigger() {
+		Money money = new Money(10);
+		Money money2 = new Money(20);
+		assertThat(money.lessThan(money2), is(true));
+	}
 }
