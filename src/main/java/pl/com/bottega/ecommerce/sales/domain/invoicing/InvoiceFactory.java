@@ -22,7 +22,6 @@ public class InvoiceFactory {
 
 	public Invoice create(ClientData client) {
 		Invoice invoice = new Invoice(Id.generate(), client);
-
 		return invoice;
 	}
 }
