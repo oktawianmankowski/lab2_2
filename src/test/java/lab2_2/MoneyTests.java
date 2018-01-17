@@ -17,7 +17,7 @@ public class MoneyTests {
 		Money moneyEur = new Money(10, "EUR");
 		moneyPln.add(moneyEur);
 	}
-	
+
 	@Test
 	public void testGivenCurrencyAddition() {
 		Money money1 = new Money(10, "PLN");
@@ -45,6 +45,42 @@ public class MoneyTests {
 	public void testGivenCurrencyBigDecimalMultiplication() {
 		Money money1 = new Money(10, "PLN");
 		Money result = new Money(100, "PLN");
+		assertThat(money1.multiplyBy(new BigDecimal(10)), is(result));
+	}
+
+	@Test
+	public void testDefaultCurrency() {
+		Money money = new Money(10);
+		assertThat(money.getCurrency(), is(Money.DEFAULT_CURRENCY));
+	}
+
+	@Test
+	public void testDefaultCurrencyAddition() {
+		Money money1 = new Money(10);
+		Money money2 = new Money(10);
+		Money result = new Money(20);
+		assertThat(money1.add(money2), is(result));
+	}
+
+	@Test
+	public void testDefaultCurrencySubtraction() {
+		Money money1 = new Money(10);
+		Money money2 = new Money(10);
+		Money result = new Money(0);
+		assertThat(money1.subtract(money2), is(result));
+	}
+
+	@Test
+	public void testDefaultCurrencyDoubleMultiplication() {
+		Money money1 = new Money(10);
+		Money result = new Money(100);
+		assertThat(money1.multiplyBy(10d), is(result));
+	}
+
+	@Test
+	public void testDefaultCurrencyBigDecimalMultiplication() {
+		Money money1 = new Money(10);
+		Money result = new Money(100);
 		assertThat(money1.multiplyBy(new BigDecimal(10)), is(result));
 	}
 
