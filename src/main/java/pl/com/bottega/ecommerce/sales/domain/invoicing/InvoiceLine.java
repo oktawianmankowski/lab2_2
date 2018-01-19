@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- * 
+ *
  */
 package pl.com.bottega.ecommerce.sales.domain.invoicing;
 
@@ -23,42 +23,38 @@ import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 public class InvoiceLine {
 
-	private ProductData product;
+    private ProductData product;
+    private int quantity;
+    private Money net;
+    private Money gros;
+    private Tax tax;
 
-	private int quantity;
+    InvoiceLine(ProductData product, int quantity, Money net, Tax tax) {
+        this.product = product;
+        this.quantity = quantity;
+        this.net = net;
+        this.tax = tax;
 
-	private Money net;
+        this.gros = net.add(tax.getAmount());
+    }
 
-	private Money gros;
+    public ProductData getProduct() {
+        return product;
+    }
 
-	private Tax tax;
+    public int getQuantity() {
+        return quantity;
+    }
 
-	InvoiceLine(ProductData product, int quantity, Money net, Tax tax) {
-		this.product = product;
-		this.quantity = quantity;
-		this.net = net;
-		this.tax = tax;
+    public Money getNet() {
+        return net;
+    }
 
-		this.gros = net.add(tax.getAmount());
-	}
+    public Money getGros() {
+        return gros;
+    }
 
-	public ProductData getProduct() {
-		return product;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public Money getNet() {
-		return net;
-	}
-
-	public Money getGros() {
-		return gros;
-	}
-
-	public Tax getTax() {
-		return tax;
-	}
+    public Tax getTax() {
+        return tax;
+    }
 }
