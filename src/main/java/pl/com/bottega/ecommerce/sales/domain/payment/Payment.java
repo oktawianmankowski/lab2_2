@@ -29,7 +29,6 @@ public class Payment {
 
 	private Id aggregateId;
 
-
 	Payment(Id aggregateId, ClientData clientData, Money amount) {
 		this.aggregateId = aggregateId;
 		this.clientData = clientData;

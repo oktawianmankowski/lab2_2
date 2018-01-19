@@ -42,8 +42,7 @@ public class Purchase {
 	private Purchase() {
 	}
 
-	Purchase(Id aggregateId, ClientData clientData,
-			List<PurchaseItem> items, Date purchaseDate, boolean paid,
+	Purchase(Id aggregateId, ClientData clientData, List<PurchaseItem> items, Date purchaseDate, boolean paid,
 			Money totalCost) {
 		this.aggregateId = aggregateId;
 		this.clientData = clientData;
@@ -74,8 +73,7 @@ public class Purchase {
 	}
 
 	public Collection<PurchaseItem> getItems() {
-		return (Collection<PurchaseItem>) Collections
-				.unmodifiableCollection(items);
+		return (Collection<PurchaseItem>) Collections.unmodifiableCollection(items);
 	}
 
 	public Id getAggregateId() {

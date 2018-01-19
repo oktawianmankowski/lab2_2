@@ -15,26 +15,25 @@
  */
 package pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage;
 
-
-
 public class ClientData {
-	
+
 	private Id aggregateId;
-	
+
 	private String name;
 
 	@SuppressWarnings("unused")
-	private ClientData(){}
-	
+	private ClientData() {
+	}
+
 	public ClientData(Id aggregateId, String name) {
 		this.aggregateId = aggregateId;
 		this.name = name;
 	}
-	
+
 	public Id getAggregateId() {
 		return aggregateId;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
