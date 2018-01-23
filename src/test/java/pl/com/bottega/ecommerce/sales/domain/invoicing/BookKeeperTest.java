@@ -1,5 +1,7 @@
 package pl.com.bottega.ecommerce.sales.domain.invoicing;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.ClientData;
@@ -14,6 +16,7 @@ import java.awt.print.Book;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
 
 import static org.junit.Assert.*;
 
@@ -122,6 +125,26 @@ public class BookKeeperTest {
         firstCurrency.add(secondCurrency);
     }
 
+    @Test
+    public void isRoundingCalculatedProperly() {
+        Money firstItem = new Money(42.309853, Money.DEFAULT_CURRENCY);
+        Money secondItem = new Money(120.121532, Money.DEFAULT_CURRENCY);
+        Money thirdItem = new Money(3.32578, Money.DEFAULT_CURRENCY);
+
+        assertEquals(firstItem.toString(),"42,31 EUR");
+
+    }
+
+    @Test
+    public void isAddingAndSubtractingCalculatedProperly() {
+        Money firstCurrency = new Money(42.30, Money.DEFAULT_CURRENCY);
+        Money secondCurrency = new Money(120.12, Money.DEFAULT_CURRENCY);
+
+        Money result = firstCurrency.add(secondCurrency);
+
+        assertEquals(result.toString(), "162,42 EUR");
+
+    }
 
     private RequestItem createRequestItem1() {
         Money price = new Money(213.67, Money.DEFAULT_CURRENCY);
