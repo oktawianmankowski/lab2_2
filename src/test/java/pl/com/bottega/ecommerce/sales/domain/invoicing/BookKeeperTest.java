@@ -118,7 +118,7 @@ public class BookKeeperTest {
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void addingTwoDifferentCurriencesThrowsAnException() throws Exception{
+    public void addingTwoDifferentCurrenciesThrowsAnException() throws Exception{
         Money firstCurrency = new Money(42.30, Money.DEFAULT_CURRENCY);
         Money secondCurrency = new Money(120.12, "PLN");
 
