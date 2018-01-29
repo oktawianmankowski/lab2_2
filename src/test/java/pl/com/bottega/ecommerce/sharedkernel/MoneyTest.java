@@ -15,4 +15,12 @@ public class MoneyTest {
         Money money = new Money(new BigDecimal(2), Currency.getInstance("PLN"));
         assertThat(money.multiplyBy(5), Matchers.is(new Money(new BigDecimal(10), Currency.getInstance("PLN"))));
     }
+
+    @Test
+    public void addSixEuroToFiveEuro() {
+        Money money = new Money(new BigDecimal(5), Currency.getInstance("EUR"));
+        Money addMoney = new Money(new BigDecimal(6), Currency.getInstance("EUR"));
+        Money expectedMoney = new Money(new BigDecimal(11), Currency.getInstance("EUR"));
+        assertThat(money.add(addMoney), Matchers.is(expectedMoney));
+    }
 }
