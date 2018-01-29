@@ -23,4 +23,12 @@ public class MoneyTest {
         Money expectedMoney = new Money(new BigDecimal(11), Currency.getInstance("EUR"));
         assertThat(money.add(addMoney), Matchers.is(expectedMoney));
     }
+
+    @Test
+    public void subtractSevenEuroFromTenEuro() {
+        Money money = new Money(new BigDecimal(10), Currency.getInstance("EUR"));
+        Money subtractMoney = new Money(new BigDecimal(7), Currency.getInstance("EUR"));
+        Money expectedMoney = new Money(new BigDecimal(3), Currency.getInstance("EUR"));
+        assertThat(money.subtract(subtractMoney), Matchers.is(expectedMoney));
+    }
 }
